@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def plot_temperature_trend(df):
-    plt.figure(figsize=(12, 6))
+def plot_all(df):
+    plt.figure(figsize=(12, 18))
+
+    plt.subplot(4, 1, 1)
     for city in df["Location"].unique():
         subset = df[df["Location"] == city]
         plt.plot(subset["Time"], subset["Temperature_C"], label=city)
@@ -11,10 +13,8 @@ def plot_temperature_trend(df):
     plt.title("Temperature at 12:00pm every Monday from 01.01.2020 to date")
     plt.legend()
     plt.grid()
-    plt.show()
 
-def plot_environmental_factors(df):
-    plt.figure(figsize=(12, 6))
+    plt.subplot(4, 1, 2)
     for location in df["Location"].unique():
         subset = df[df["Location"] == location]
         plt.plot(subset["Timestamp"], subset["Humidity_percent"], label=location)
@@ -23,11 +23,8 @@ def plot_environmental_factors(df):
     plt.title("Relative Humidity at 12:00 every Monday")
     plt.legend()
     plt.grid()
-    plt.tight_layout()
-    plt.show()
 
-def plot_precipitation(df):
-    plt.figure(figsize=(12, 6))
+    plt.subplot(4, 1, 3)
     for location in df["Location"].unique():
         subset = df[df["Location"] == location]
         plt.plot(subset["Timestamp"], subset["Precipitation_mm"], label=location)
@@ -36,11 +33,8 @@ def plot_precipitation(df):
     plt.title("Precipitation at 12:00 every Monday")
     plt.legend()
     plt.grid()
-    plt.tight_layout()
-    plt.show()
 
-def plot_wind_speed(df):
-    plt.figure(figsize=(12, 6))
+    plt.subplot(4, 1, 4)
     for location in df["Location"].unique():
         subset = df[df["Location"] == location]
         plt.plot(subset["Timestamp"], subset["WindSpeed_mps"], label=location)
@@ -49,5 +43,9 @@ def plot_wind_speed(df):
     plt.title("Wind Speed at 12:00 every Monday")
     plt.legend()
     plt.grid()
+
     plt.tight_layout()
     plt.show()
+
+# Kall funksjonen for å plotte alle grafene i samme figur
+plot_all(df)
