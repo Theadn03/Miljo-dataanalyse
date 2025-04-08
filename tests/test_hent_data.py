@@ -20,7 +20,7 @@ def test_hent_data_med_gyldig_input():
 
 # Test med ugyldig stasjons-ID for å sjekke robusthet
 def test_hent_data_med_ugyldig_stasjon():
-    client_id = "DUMMY_API_KEY"
+    client_id = "e0cdd794-6446-4380-9df0-e6828509519c" #API-nøkkel
     stasjoner = {"Ukjent": "SN00000"}  # Ikke eksisterende ID
     start = datetime(2023, 1, 1)
     slutt = datetime(2023, 1, 2)
