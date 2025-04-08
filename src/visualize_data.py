@@ -1,4 +1,4 @@
-vil du gi meg koden med plt.figure og plt.subplot? import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import seaborn as sns
 
 def plot_temperature_trend(df):
