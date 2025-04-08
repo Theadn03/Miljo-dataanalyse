@@ -1,7 +1,7 @@
 import requests
 from datetime import datetime, timedelta
 
-def hent_data_fra_frost(client_id, stations, start_date, end_date):
+def fetch_data_from_frost(client_id, stations, start_date, end_date):
     weather_data = []
     current_date = start_date
 
