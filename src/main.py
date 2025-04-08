@@ -1,6 +1,4 @@
 import os
-os.makedirs("data", exist_ok=True)
-
 from datetime import datetime
 from fetch_data import fetch_data_from_frost
 from process_data import process_and_clean_data
@@ -47,7 +45,7 @@ df = process_and_clean_data(weather_data)
 # 3. Visualisering
 # -----------------------
 
-# Lager en linjegraf som viser temperaturutvikling for hver by over tid
+# Lager linjegrafer for hver by og hver miljøvariabel over tid
 print("Creating visualization...")
 plot_temperature_trend(df)
 plot_environmental_factors(df)
@@ -58,11 +56,13 @@ plot_wind_speed(df)
 # 4. Eksport av data
 # -----------------------
 
+# Sørg for at data-mappen finnes
+os.makedirs("data", exist_ok=True)
+
 # Lagrer den rensede og strukturerte dataen til en CSV-fil
 # CSV-filer gjør det enkelt å bruke data videre i f.eks. Excel, Python, Power BI, etc.
 df.to_csv("data/weekly_weather_data.csv", index=False, encoding='utf-8')
-print("'weekly_weather_data.csv' saved.")
-
+print("'weekly_weather_data.csv' saved in 'data/' folder.")
 
 # Logger hvor mange rader som ble hentet og prosessert, for å få et inntrykk av datavolumet
 print(f"Data contains {len(df)} records.")
