@@ -30,7 +30,7 @@ def fetch_data_from_frost(client_id, stations, start_date, end_date):
                                 "Location": city,
                                 "Time": obs["referenceTime"],
                                 "Air temperature (°C)": values.get("air_temperature"),
-                                "Precipitation (mm)": values.get("precipitation_amount"),
+                                "Precipitation amount (mm)": values.get("precipitation_amount"),
                                 "Wind-speed (m/s)": values.get("wind_speed"),
                                 "Reltive humidity (%)": values.get("relative_humidity")
                             })
