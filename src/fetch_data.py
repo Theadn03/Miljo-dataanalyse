@@ -1,10 +1,11 @@
-import requirements
 from datetime import datetime, timedelta
+import requests
 
 def fetch_data_from_frost(client_id, stations, start_date, end_date):
     weather_data = []
     current_date = start_date
 
+#loopen henter data i årlige bolker for å unngå store API-responser
     while current_date < end_date:
         next_date = current_date + timedelta(days=365)
         if next_date > end_date:
@@ -23,7 +24,7 @@ def fetch_data_from_frost(client_id, stations, start_date, end_date):
                 if "data" in data:
                     for obs in data["data"]:
                         obs_time = datetime.fromisoformat(obs["referenceTime"].replace("Z", "+00:00"))
-                       if obs_time.weekday() == 0 and obs_time.hour == 12:
+                        if obs_time.weekday() == 0 and obs_time.hour == 12:
                             values = {entry["elementId"]: entry["value"] for entry in obs["observations"]}
                             weather_data.append({
                                 "Lokasjon": city,

@@ -1,7 +1,7 @@
 from datetime import datetime
-from src.fetch_data import fetch_data_from_frost
-from src.process_data import process_and_clean_data
-from src.visualize_data import plot_temperature_trend
+from fetch_data import fetch_data_from_frost
+from process_data import process_and_clean_data
+from visualize_data import plot_temperature_trend
 
 # Setup
 client_id = "e0cdd794-6446-4380-9df0-e6828509519c"
@@ -23,5 +23,5 @@ df = process_and_clean_data(weather_data)
 print("Creating visualization...")
 plot_temperature_trend(df)
 
-df.to_csv("ukedata.csv", index=False, encoding='utf-8')
-print("'ukedata.csv' saved.")
+df.to_csv("data/weekly_weather_data.csv", index=False, encoding='utf-8')
+print("'weekly_weather_data.csv' saved.")
