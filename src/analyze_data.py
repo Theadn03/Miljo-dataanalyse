@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 # Funksjon for å skrive ut gjennomsnitt, median og standardavvik for alle relevante variabler
 def print_basic_statistics(df):
     print("\nDescriptive statistics (temperature, precipitation, wind, humidity):")
-    variables = ["Temperature_C", "Precipitation_mm", "WindSpeed_mps", "Humidity_percent"]
+    variables = ["Air temperature (°C)", "Precipitation amount (mm)", "Wind-speed (m/s)", "Reltive humidity (%)"]
     
     for var in variables:
         print(f"\n{var}:")
@@ -15,9 +15,9 @@ def print_basic_statistics(df):
 # Funksjon for å vise korrelasjon mellom temperatur og de andre variablene
 def print_correlation(df):
     print("\nCorrelation between temperature and other variables:")
-    print("  Temp vs. Humidity:", df["Temperature_C"].corr(df["Humidity_percent"]))
-    print("  Temp vs. Wind Speed:", df["Temperature_C"].corr(df["WindSpeed_mps"]))
-    print("  Temp vs. Precipitation:", df["Temperature_C"].corr(df["Precipitation_mm"]))
+    print("  Temp vs. Humidity:", df["Air temperature (°C)"].corr(df["Reltive humidity (%)"]))
+    print("  Temp vs. Wind Speed:", df["Air temperature (°C)"].corr(df["Wind-speed (m/s)"]))
+    print("  Temp vs. Precipitation:", df["Air temperature (°C)"].corr(df["Precipitation amount (mm)"]))
 
 # Funksjon for å plotte fordelingen (histogram) av en valgt variabel
 def plot_distribution(df, column):
@@ -33,5 +33,5 @@ def plot_distribution(df, column):
 # Funksjon for å skrive ut skjevhet (asymmetri) i datasettet for hver variabel
 def print_skewness(df):
     print("\nSkewness in key variables:")
-    for col in ["Temperature_C", "Precipitation_mm", "WindSpeed_mps", "Humidity_percent"]:
+    for col in ["Air temperature (°C)", "Wind-speed (m/s)", "Wind-speed (m/s)", "Reltive humidity (%)"]:
         print(f"  {col}: {df[col].skew():.2f}")

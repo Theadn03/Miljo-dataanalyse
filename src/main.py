@@ -27,12 +27,11 @@ stations = {
     "Steinkjer": "SN70680"
 }
 
-start_date = datetime(2025, 1, 1)
+start_date = datetime(2022, 1, 1)
 end_date = datetime.now()
 
 print("Fetching data...")
 weather_data = fetch_data_from_frost(client_id, stations, start_date, end_date)
-
 # -----------------------
 # 2. Databehandling og rensing
 # -----------------------
@@ -60,7 +59,7 @@ print("Running statistical analysis...")
 print_basic_statistics(df)
 print_correlation(df)
 print_skewness(df)
-plot_distribution(df, "Temperature_C")  # Valgfritt: vis fordeling av temperatur
+plot_distribution(df, "Air temperature (°C)")  # Valgfritt: vis fordeling av temperatur
 
 # -----------------------
 # 5. Eksport av data
