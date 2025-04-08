@@ -1,7 +1,6 @@
 import pandas as pd
 from src.process_data import process_and_clean_data
 
-# Dummy værdata (to rader, med én manglende verdi)
 testdata = [
     {
         "Lokasjon": "Molde",
