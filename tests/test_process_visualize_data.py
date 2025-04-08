@@ -1,23 +1,22 @@
 import pandas as pd
 from src.process_data import process_and_clean_data
 
-# Dummy værdata (to rader, med én manglende verdi)
 testdata = [
     {
-        "Lokasjon": "Molde",
-        "Tidspunkt": "2023-01-02T12:00:00+00:00",
-        "Temperatur (°C)": 2.0,
-        "Nedbør (mm)": 0.5,
-        "Vindhastighet (m/s)": 3.2,
-        "Luftfuktighet (%)": 85
+        "Location": "Molde",
+        "Time": "2023-01-02T12:00:00+00:00",
+        "Air temperature (°C)": 2.0,
+        "Precipitation (mm)": 0.5,
+        "Wind-speed (m/s)": 3.2,
+        "Relative humidity (%)": 85
     },
     {
-        "Lokasjon": "Molde",
-        "Tidspunkt": "2023-01-09T12:00:00+00:00",
-        "Temperatur (°C)": None,
-        "Nedbør (mm)": 0.0,
-        "Vindhastighet (m/s)": 2.9,
-        "Luftfuktighet (%)": 80
+        "Location": "Molde",
+        "Time": "2023-01-09T12:00:00+00:00",
+        "Air temperature (°C)": None,
+        "Precipitation amount (mm)": 0.0,
+        "Wind-speed (m/s)": 2.9,
+        "Relative humidity (%)": 80
     }
 ]
 
