@@ -1,7 +1,12 @@
 from datetime import datetime
 from fetch_data import fetch_data_from_frost
 from process_data import process_and_clean_data
-from visualize_data import plot_temperature_trend
+from visualize_data import (
+    plot_temperature_trend,
+    plot_environmental_factors,
+    plot_precipitation,
+    plot_wind_speed
+)
 
 # Setup
 client_id = "e0cdd794-6446-4380-9df0-e6828509519c"
@@ -22,6 +27,9 @@ df = process_and_clean_data(weather_data)
 
 print("Creating visualization...")
 plot_temperature_trend(df)
+plot_environmental_factors(df)
+plot_precipitation(df)
+plot_wind_speed(df)
 
 df.to_csv("data/weekly_weather_data.csv", index=False, encoding='utf-8')
 print("'weekly_weather_data.csv' saved.")
