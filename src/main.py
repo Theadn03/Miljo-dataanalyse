@@ -1,7 +1,7 @@
 from datetime import datetime
-from data.hent_data import hent_data_fra_frost
-from Prosessering.behandle_data import behandle_og_rens_data
-from Visualisering.vis_data import vis_temperaturgraf
+from src.fetch_data import fetch_data_from_frost
+from src.process_data import process_and_clean_data
+from src.visualize_data import plot_temperature_trend
 
 # Oppsett
 client_id = "e0cdd794-6446-4380-9df0-e6828509519c"
