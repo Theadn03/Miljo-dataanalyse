@@ -35,4 +35,3 @@ def print_skewness(df):
     print("\nSkewness in key variables:")
     for col in ["Temperature_C", "Precipitation_mm", "WindSpeed_mps", "Humidity_percent"]:
         print(f"  {col}: {df[col].skew():.2f}")
-

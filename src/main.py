@@ -8,6 +8,12 @@ from visualize_data import (
     plot_precipitation,
     plot_wind_speed
 )
+from analyze_data import (
+    print_basic_statistics,
+    print_correlation,
+    plot_distribution,
+    print_skewness
+)
 
 # -----------------------
 # 1. Konfigurasjon og datainnhenting
@@ -21,7 +27,7 @@ stations = {
     "Steinkjer": "SN70680"
 }
 
-start_date = datetime(2020, 1, 1)
+start_date = datetime(2025, 1, 1)
 end_date = datetime.now()
 
 print("Fetching data...")
@@ -47,7 +53,17 @@ plot_precipitation(df)
 plot_wind_speed(df)
 
 # -----------------------
-# 4. Eksport av data
+# 4. Statistisk analyse
+# -----------------------
+
+print("Running statistical analysis...")
+print_basic_statistics(df)
+print_correlation(df)
+print_skewness(df)
+plot_distribution(df, "Temperature_C")  # Valgfritt: vis fordeling av temperatur
+
+# -----------------------
+# 5. Eksport av data
 # -----------------------
 
 os.makedirs("data", exist_ok=True)  # Sørg for at data-mappen finnes
