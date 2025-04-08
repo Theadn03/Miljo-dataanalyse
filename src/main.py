@@ -1,3 +1,6 @@
+import os
+os.makedirs("data", exist_ok=True)
+
 from datetime import datetime
 from fetch_data import fetch_data_from_frost
 from process_data import process_and_clean_data
