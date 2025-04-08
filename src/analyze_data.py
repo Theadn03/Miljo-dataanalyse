@@ -1,10 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-#123
-
-#test test
-
 # Funksjon for å skrive ut gjennomsnitt, median og standardavvik for alle relevante variabler
 def print_basic_statistics(df):
     print("\nDescriptive statistics (temperature, precipitation, wind, humidity):")
