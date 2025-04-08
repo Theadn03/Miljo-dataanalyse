@@ -3,9 +3,9 @@
 
 import pytest
 from datetime import datetime
-from src.hent_dataene import hent_data_fra_frost
+from src.hent_data import hent_data_fra_frost
 
-# Bruk dummy data (kortere periode og kun én stasjon for test)
+# Bruker dummy data (kortere periode og kun én stasjon for test)
 def test_hent_data_med_gyldig_input():
     client_id = "e0cdd794-6446-4380-9df0-e6828509519c"  #API-nøkkel
     stasjoner = {"Molde": "SN62295"}
@@ -18,7 +18,7 @@ def test_hent_data_med_gyldig_input():
     except Exception as e:
         pytest.fail(f"Funksjonen feilet med feil: {e}")
 
-# Test med ugyldig stasjons-ID for å sjekke robusthet
+# Tester med ugyldig stasjons-ID for å sjekke robusthet
 def test_hent_data_med_ugyldig_stasjon():
     client_id = "e0cdd794-6446-4380-9df0-e6828509519c" #API-nøkkel
     stasjoner = {"Ukjent": "SN00000"}  # Ikke eksisterende ID
