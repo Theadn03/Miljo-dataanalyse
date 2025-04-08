@@ -1,4 +1,4 @@
-import requests
+import requirements
 from datetime import datetime, timedelta
 
 def fetch_data_from_frost(client_id, stations, start_date, end_date):
