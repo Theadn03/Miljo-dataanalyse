@@ -1,2 +1,2 @@
-# Miljo-dataanalyse
+# Miljø-dataanalyse
 Prosjektoppgave - Gruppe 50
