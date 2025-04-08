@@ -46,10 +46,10 @@ df.interpolate(method="linear", inplace=True)
 # -----------------------
 
 print("Creating visualization...")
-plot_temperature_trend(df)
-plot_environmental_factors(df)
-plot_precipitation(df)
-plot_wind_speed(df)
+#plot_temperature_trend(df)
+#plot_environmental_factors(df)
+#plot_precipitation(df)
+#plot_wind_speed(df)
 
 # -----------------------
 # 4. Statistisk analyse
