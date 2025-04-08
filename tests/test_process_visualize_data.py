@@ -1,7 +1,5 @@
-# Tester for behandle_data.py og vis_data.py
-
 import pandas as pd
-from src.behandle_data import behandle_og_rens_data
+from src.process_data import process_and_clean_data
 
 # Dummy værdata (to rader, med én manglende verdi)
 testdata = [
@@ -23,19 +21,19 @@ testdata = [
     }
 ]
 
-def test_behandle_og_rens_data_interpolerer():
-    df = behandle_og_rens_data(testdata)
-    assert not df.isnull().any().any(), "Det finnes fortsatt NaN-verdier etter interpolasjon"
-    assert "Temperatur_C" in df.columns, "Kolonnen 'Temperatur_C' ble ikke opprettet"
-    assert isinstance(df, pd.DataFrame), "Returnert verdi er ikke en DataFrame"
+def test_process_and_clean_data_interpolates():
+    df = process_and_clean_data(testdata)
+    assert not df.isnull().any().any(), "NaN values remain after interpolation"
+    assert "Temperatur_C" in df.columns, "'Temperatur_C' column was not created"
+    assert isinstance(df, pd.DataFrame), "Returned object is not a DataFrame"
 
-# Eksempel på visuell test (kjøres ikke automatisk, men kan brukes manuelt)
-# Bruk 'pytest -s' for å vise plott
-from src.vis_data import vis_temperaturgraf
+# Visuell test (kjøres ikke automatisk av pytest, men for manuell kontroll)
+from src.visualize_data import plot_temperature_trend
 
-def test_vis_temperaturgraf_viser_plot():
-    df = behandle_og_rens_data(testdata)
+def test_plot_temperature_trend_shows_plot():
+    df = process_and_clean_data(testdata)
     try:
-        vis_temperaturgraf(df)
+        plot_temperature_trend(df)
     except Exception as e:
-        assert False, f"Feil under plotting: {e}"
+        assert False, f"Error during plotting: {e}"
+
