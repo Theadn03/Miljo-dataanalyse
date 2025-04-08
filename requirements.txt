@@ -2,3 +2,4 @@ requirements
 pandas
 matplotlib
 pandasql
+seaborn
