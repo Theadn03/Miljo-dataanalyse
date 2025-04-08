@@ -7,7 +7,7 @@ def plot_temperature_trend(df):
         plt.plot(subset["Time"], subset["Temperature_C"], label=city)
     plt.xlabel("Time")
     plt.ylabel("Temperature (°C)")
-    plt.title("Temperature at 12:00pm every Monday from 01.01.2020")
+    plt.title("Temperature at 12:00pm every Monday from 01.01.2020 to date")
     plt.legend()
     plt.grid()
     plt.show()
