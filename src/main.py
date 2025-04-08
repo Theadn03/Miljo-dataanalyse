@@ -27,11 +27,12 @@ stations = {
     "Steinkjer": "SN70680"
 }
 
-start_date = datetime(2022, 1, 1)
+start_date = datetime(2023, 1, 1)
 end_date = datetime.now()
 
 print("Fetching data...")
 weather_data = fetch_data_from_frost(client_id, stations, start_date, end_date)
+
 # -----------------------
 # 2. Databehandling og rensing
 # -----------------------
@@ -46,10 +47,11 @@ df.interpolate(method="linear", inplace=True)
 # -----------------------
 
 print("Creating visualization...")
-#plot_temperature_trend(df)
-#plot_environmental_factors(df)
-#plot_precipitation(df)
-#plot_wind_speed(df)
+plot_temperature_trend(df)
+plot_environmental_factors(df)
+plot_precipitation(df)
+plot_wind_speed(df)
+
 
 # -----------------------
 # 4. Statistisk analyse

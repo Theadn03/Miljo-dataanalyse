@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import requests
+import json
 
 def fetch_data_from_frost(client_id, stations, start_date, end_date):
     weather_data = []
@@ -15,24 +16,18 @@ def fetch_data_from_frost(client_id, stations, start_date, end_date):
             url = "https://frost.met.no/observations/v0.jsonld"
             params = {
                 "sources": station_id,
-                "elements": "air_temperature,precipitation_amount,wind_speed,relative_humidity",
+                "elements": "mean(air_temperature P1D),sum(precipitation_amount P1D),mean(wind_speed P1D),mean(relative_humidity P1D)",
                 "referencetime": f"{current_date.date()}/{next_date.date()}"
             }
             response = requests.get(url, params=params, auth=(client_id, ""))
             if response.status_code == 200:
                 data = response.json()
                 if "data" in data:
-                    for obs in data["data"]:
-                        obs_time = datetime.fromisoformat(obs["referenceTime"].replace("Z", "+00:00"))
-                        if obs_time.weekday() == 0 and obs_time.hour == 12:
-                            values = {entry["elementId"]: entry["value"] for entry in obs["observations"]}
-                            weather_data.append({
-                                "Location": city,
-                                "Time": obs["referenceTime"],
-                                "Air temperature (°C)": values.get("air_temperature"),
-                                "Precipitation amount (mm)": values.get("precipitation_amount"),
-                                "Wind-speed (m/s)": values.get("wind_speed"),
-                                "Reltive humidity (%)": values.get("relative_humidity")
-                            })
+                    print(json.dumps(data["data"][0]))
+                    print("----------------------------------------------------")
+                    for x in data["data"]:
+                        for observation in x["observations"]:
+                            weather_data.append({**observation, "Time": x["referenceTime"], "Location": x["sourceId"]})
+                        
         current_date = next_date
     return weather_data
