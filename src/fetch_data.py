@@ -27,12 +27,12 @@ def fetch_data_from_frost(client_id, stations, start_date, end_date):
                         if obs_time.weekday() == 0 and obs_time.hour == 12:
                             values = {entry["elementId"]: entry["value"] for entry in obs["observations"]}
                             weather_data.append({
-                                "Lokasjon": city,
-                                "Tidspunkt": obs["referenceTime"],
-                                "Temperatur (°C)": values.get("air_temperature"),
-                                "Nedbør (mm)": values.get("precipitation_amount"),
-                                "Vindhastighet (m/s)": values.get("wind_speed"),
-                                "Luftfuktighet (%)": values.get("relative_humidity")
+                                "Location": city,
+                                "Time": obs["referenceTime"],
+                                "Air temperature (°C)": values.get("air_temperature"),
+                                "Precipitation (mm)": values.get("precipitation_amount"),
+                                "Wind-speed (m/s)": values.get("wind_speed"),
+                                "Reltive humidity (%)": values.get("relative_humidity")
                             })
         current_date = next_date
     return weather_data
