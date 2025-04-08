@@ -53,4 +53,5 @@ df.to_csv("data/weekly_weather_data.csv", index=False, encoding='utf-8')
 print("'weekly_weather_data.csv' saved.")
 
 
+# Logger hvor mange rader som ble hentet og prosessert, for å få et inntrykk av datavolumet
 print(f"Data contains {len(df)} records.")
