@@ -15,10 +15,7 @@ from analyze_data import (
     print_skewness
 )
 
-# -----------------------
 # 1. Konfigurasjon og datainnhenting
-# -----------------------
-
 client_id = "e0cdd794-6446-4380-9df0-e6828509519c"  # API-nøkkel for tilgang til Frost-tjenesten
 
 stations = {
@@ -33,40 +30,27 @@ end_date = datetime.now()
 print("Fetching data...")
 weather_data = fetch_data_from_frost(client_id, stations, start_date, end_date)
 
-# -----------------------
 # 2. Databehandling og rensing
-# -----------------------
-
 print("Processing and cleaning data...")
 df = process_and_clean_data(weather_data)
 df = df.infer_objects(copy=False)  # Legg til denne linjen
 df.interpolate(method="linear", inplace=True)
 
-# -----------------------
 # 3. Visualisering
-# -----------------------
-
 print("Creating visualization...")
 plot_temperature_trend(df)
 plot_environmental_factors(df)
 plot_precipitation(df)
 plot_wind_speed(df)
 
-
-# -----------------------
 # 4. Statistisk analyse
-# -----------------------
-
 print("Running statistical analysis...")
 print_basic_statistics(df)
 print_correlation(df)
 print_skewness(df)
 plot_distribution(df, "Air temperature (°C)")  # Valgfritt: vis fordeling av temperatur
 
-# -----------------------
 # 5. Eksport av data
-# -----------------------
-
 os.makedirs("data", exist_ok=True)  # Sørg for at data-mappen finnes
 
 df.to_csv("data/weekly_weather_data.csv", index=False, encoding='utf-8')
