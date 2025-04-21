@@ -27,7 +27,8 @@ def fetch_data_from_frost(client_id, stations, start_date, end_date):
                     print("----------------------------------------------------")
                     for x in data["data"]:
                         for observation in x["observations"]:
-                            weather_data.append({**observation, "Time": x["referenceTime"], "Location": x["sourceId"]})
+                            #weather_data.append({**observation, "Time": x["referenceTime"], "Location": x["sourceId"]})
+                            weather_data.append({**observation, "Time": x["referenceTime"], "Location": city})
                         
         current_date = next_date
     return weather_data
