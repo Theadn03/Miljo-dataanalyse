@@ -2,6 +2,9 @@ import os
 from datetime import datetime
 from fetch_data import fetch_data_from_frost
 from process_data import process_and_clean_data
+from visualize_data import plot_histogram
+from visualize_data import plot_scatterplot
+from regression_model import train_model_for_city
 from visualize_data import (
     plot_temperature_trend,
     plot_environmental_factors,
@@ -42,6 +45,15 @@ plot_temperature_trend(df)
 plot_environmental_factors(df)
 plot_precipitation(df)
 plot_wind_speed(df)
+
+plot_histogram(df, "mean(air_temperature P1D)", "Air Temperature (°C)")
+plot_histogram(df, "mean(relative_humidity P1D)", "Relative Humiditiy (%)")
+
+for city in df["Location"].unique():
+    train_model_for_city(df, city)
+
+model, y_test, y_pred = train_model_for_city(df, city)
+plot_scatterplot(y_test, y_pred, city)
 
 # 4. Statistisk analyse
 print("Running statistical analysis...")
