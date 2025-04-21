@@ -22,9 +22,9 @@ from analyze_data import (
 client_id = "e0cdd794-6446-4380-9df0-e6828509519c"  # API-nøkkel for tilgang til Frost-tjenesten
 
 stations = {
+    "Steinkjer": "SN70680",
     "Molde": "SN62295",
-    "Ålesund": "SN60945",
-    "Steinkjer": "SN70680"
+    "Ålesund": "SN60945"
 }
 
 start_date = datetime(2023, 1, 1)
@@ -50,10 +50,8 @@ plot_histogram(df, "mean(air_temperature P1D)", "Air Temperature (°C)")
 plot_histogram(df, "mean(relative_humidity P1D)", "Relative Humiditiy (%)")
 
 for city in df["Location"].unique():
-    train_model_for_city(df, city)
-
-model, y_test, y_pred = train_model_for_city(df, city)
-plot_scatterplot(y_test, y_pred, city)
+    model, y_test, y_pred = train_model_for_city(df, city)
+    plot_scatterplot(y_test, y_pred, city)
 
 # 4. Statistisk analyse
 print("Running statistical analysis...")

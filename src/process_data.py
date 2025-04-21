@@ -12,4 +12,3 @@ def process_and_clean_data(weather_data):
     df.interpolate(method="linear", inplace=True)
     #df.rename(columns={"Temperature (°C)": "Temperature_C"}, inplace=True)
     return df
-
