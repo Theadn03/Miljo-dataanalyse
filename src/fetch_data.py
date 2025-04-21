@@ -6,7 +6,7 @@ def fetch_data_from_frost(client_id, stations, start_date, end_date):
     weather_data = []
     current_date = start_date
 
-#loopen henter data i årlige bolker for å unngå store API-responser
+# Loopen henter data i årlige bolker for å unngå store API-responser
     while current_date < end_date:
         next_date = current_date + timedelta(days=365)
         if next_date > end_date:
@@ -27,7 +27,8 @@ def fetch_data_from_frost(client_id, stations, start_date, end_date):
                     print("----------------------------------------------------")
                     for x in data["data"]:
                         for observation in x["observations"]:
-                            weather_data.append({**observation, "Time": x["referenceTime"], "Location": x["sourceId"]})
+                            #weather_data.append({**observation, "Time": x["referenceTime"], "Location": x["sourceId"]})
+                            weather_data.append({**observation, "Time": x["referenceTime"], "Location": city})
                         
         current_date = next_date
     return weather_data

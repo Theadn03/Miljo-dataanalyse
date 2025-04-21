@@ -1,6 +1,13 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# Farger til de ulike byene
+city_colors = {
+    "Steinkjer": "#FFD700",   # gul
+    "Molde": "#0072B2",       # blå
+    "Ålesund": "#FF8000"     # oransje
+}
+
 def plot_temperature_trend(df):
     plt.figure(figsize=(12, 6))
 
@@ -10,7 +17,7 @@ def plot_temperature_trend(df):
     
         if not subset_filtered.empty:
             print(subset_filtered)
-            plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city)
+            plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city, color=city_colors.get(city, None))
 
     plt.xlabel("Time")
     plt.ylabel("Temp")
@@ -27,7 +34,7 @@ def plot_environmental_factors(df):
         
         if not subset_filtered.empty:
             print(subset_filtered)
-            plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city)
+            plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city, color=city_colors.get(city, None))
             
     plt.xlabel("Time")
     plt.ylabel("Relative humidity (%)")
@@ -45,7 +52,7 @@ def plot_precipitation(df):
         
         if not subset_filtered.empty:
             print(subset_filtered)
-            plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city)
+            plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city, color=city_colors.get(city, None))
     plt.xlabel("Time")
     plt.ylabel("Precipitation amount (mm)")
     plt.title("Precipitation at 12:00 every Monday")
@@ -62,7 +69,7 @@ def plot_wind_speed(df):
         
         if not subset_filtered.empty:
             print(subset_filtered)
-            plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city)
+            plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city, color=city_colors.get(city, None))
     plt.xlabel("Time")
     plt.ylabel("Wind Speed (m/s)")
     plt.title("Wind Speed at 12:00 every Monday")
@@ -70,3 +77,42 @@ def plot_wind_speed(df):
     plt.grid()
     plt.tight_layout()
     plt.show()
+    
+# Lager et histogram for en valgt værvariabel basert på elementId
+def plot_histogram(df, element_id, label):
+    locations = df["Location"].unique()
+    plt.figure(figsize=(12, 6))
+
+    for loc in locations:
+        subset = df[(df["Location"] == loc) & (df["elementId"] == element_id)]["value"]
+        if not subset.empty:
+            color = city_colors.get(loc, None)
+            plt.hist(subset, bins=20, alpha=0.7, label=loc, edgecolor="black", color=color)
+
+    plt.title(f"Distribution of {label} by Location")
+    plt.xlabel(label)
+    plt.ylabel("Frequency")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+   
+# Prediktiv analyse med scatterplot 
+def plot_scatterplot(y_test, y_pred, city):
+    plt.figure(figsize=(10, 5))
+    plt.scatter(y_test, y_pred, label="Predictions", alpha=0.6)
+    plt.plot(
+        [min(y_test.min(), y_pred.min()), max(y_test.max(), y_pred.max())],
+        [min(y_test.min(), y_pred.min()), max(y_test.max(), y_pred.max())],
+        'r--',
+        label="Perfect Prediction", color=city_colors.get(city, None)
+    )
+    plt.xlabel("Actual Humidity (%)")
+    plt.ylabel("Predicted Humidity (%)")
+    plt.title(f"Actual vs. Predicted Humidity – {city}")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+    plt.close()

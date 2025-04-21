@@ -2,6 +2,9 @@ import os
 from datetime import datetime
 from fetch_data import fetch_data_from_frost
 from process_data import process_and_clean_data
+from visualize_data import plot_histogram
+from visualize_data import plot_scatterplot
+from regression_model import train_model_for_city
 from visualize_data import (
     plot_temperature_trend,
     plot_environmental_factors,
@@ -19,9 +22,9 @@ from analyze_data import (
 client_id = "e0cdd794-6446-4380-9df0-e6828509519c"  # API-nøkkel for tilgang til Frost-tjenesten
 
 stations = {
+    "Steinkjer": "SN70680",
     "Molde": "SN62295",
-    "Ålesund": "SN60945",
-    "Steinkjer": "SN70680"
+    "Ålesund": "SN60945"
 }
 
 start_date = datetime(2023, 1, 1)
@@ -42,6 +45,13 @@ plot_temperature_trend(df)
 plot_environmental_factors(df)
 plot_precipitation(df)
 plot_wind_speed(df)
+
+plot_histogram(df, "mean(air_temperature P1D)", "Air Temperature (°C)")
+plot_histogram(df, "mean(relative_humidity P1D)", "Relative Humiditiy (%)")
+
+for city in df["Location"].unique():
+    model, y_test, y_pred = train_model_for_city(df, city)
+    plot_scatterplot(y_test, y_pred, city)
 
 # 4. Statistisk analyse
 print("Running statistical analysis...")
