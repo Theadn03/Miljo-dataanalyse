@@ -70,3 +70,40 @@ def plot_wind_speed(df):
     plt.grid()
     plt.tight_layout()
     plt.show()
+    
+# Lager et histogram for en valgt værvariabel basert på elementId
+def plot_histogram(df, element_id, label, color_map=None):
+    locations = df["Location"].unique()
+    plt.figure(figsize=(12, 6))
+
+    for loc in locations:
+        subset = df[(df["Location"] == loc) & (df["elementId"] == element_id)]["value"]
+        if not subset.empty:
+            plt.hist(subset, bins=20, alpha=0.5, label=loc, edgecolor="black")
+
+    plt.title(f"Distribution of {label} by Location")
+    plt.xlabel(label)
+    plt.ylabel("Frequency")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+   
+# Prediktiv analyse med scatterplot 
+def plot_scatterplot(y_test, y_pred, city):
+    plt.figure(figsize=(10, 5))
+    plt.scatter(y_test, y_pred, label="Predictions", alpha=0.6)
+    plt.plot(
+        [min(y_test.min(), y_pred.min()), max(y_test.max(), y_pred.max())],
+        [min(y_test.min(), y_pred.min()), max(y_test.max(), y_pred.max())],
+        'r--',
+        label="Perfect Prediction"
+    )
+    plt.xlabel("Actual Temperature (°C)")
+    plt.ylabel("Predicted Temperature (°C)")
+    plt.title(f"Actual vs. Predicted Temperature – {city}")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+    plt.close()
