@@ -14,7 +14,7 @@ def plot_temperature_trend(df):
 
     plt.xlabel("Time")
     plt.ylabel("Temp")
-    plt.title("Temperature at 12:00pm every Monday from 01.01.2023 to date")
+    plt.title("Temperature at 12:00pm every Monday from 01.01.2020 to date")
     plt.legend()
     plt.grid()
     plt.show()
