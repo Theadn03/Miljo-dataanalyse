@@ -1,3 +1,4 @@
+# Tester at datarensingen fungerer som forventet
 import pandas as pd
 from src.process_data import process_and_clean_data
 
@@ -35,4 +36,3 @@ def test_plot_temperature_trend_shows_plot():
         plot_temperature_trend(df)
     except Exception as e:
         assert False, f"Error during plotting: {e}"
-

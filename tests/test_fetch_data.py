@@ -1,3 +1,4 @@
+# Denne sikrer at API-integrasjonen fungerer og at feilhåndtering er på plass
 import pytest
 from datetime import datetime
 from src.fetch_data import fetch_data_from_frost
