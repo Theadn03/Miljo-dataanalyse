@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.express as px
 
 # Farger til de ulike byene
 city_colors = {
@@ -21,7 +22,7 @@ def plot_temperature_trend(df):
 
     plt.xlabel("Time")
     plt.ylabel("Temp")
-    plt.title("Temperature at 12:00pm every Monday from 01.01.2020 to date")
+    plt.title("Temperature at 12:00pm every Monday from 01.01.2023 to 01.05.2025")
     plt.legend()
     plt.grid()
     plt.show()
@@ -78,26 +79,40 @@ def plot_wind_speed(df):
     plt.tight_layout()
     plt.show()
     
-# Lager et histogram for en valgt værvariabel basert på elementId
+# Lager et dyniamsk histogram for en valgt værvariabel basert på elementId
 def plot_histogram(df, element_id, label):
     locations = df["Location"].unique()
-    plt.figure(figsize=(12, 6))
+    filtered_df = df[df["elementId"] == element_id]
 
-    for loc in locations:
-        subset = df[(df["Location"] == loc) & (df["elementId"] == element_id)]["value"]
-        if not subset.empty:
-            color = city_colors.get(loc, None)
-            plt.hist(subset, bins=20, alpha=0.7, label=loc, edgecolor="black", color=color)
+    if filtered_df.empty:
+        print(f"No data available for {element_id}")
+        return
 
-    plt.title(f"Distribution of {label} by Location")
-    plt.xlabel(label)
-    plt.ylabel("Frequency")
-    plt.legend()
-    plt.grid(True)
-    plt.tight_layout()
-    plt.show()
-
-   
+    fig = px.histogram(
+        filtered_df,
+        x="value",
+        color="Location",
+        barmode="overlay",
+        nbins=20,
+        labels={"value": label},
+        title=f"Interactive Distribution of {label} by Location",
+        color_discrete_map={
+            "Steinkjer": "#FFD700",
+            "Molde": "#0072B2",
+            "Ålesund": "#FF8000"
+        }
+    )
+    
+    fig.update_layout(
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        xaxis=dict(showgrid=True, gridcolor="lightgrey"),
+        yaxis=dict(showgrid=True, gridcolor="lightgrey")
+    )
+    
+    fig.show()
+    
+    
 # Prediktiv analyse med scatterplot 
 def plot_scatterplot(y_test, y_pred, city):
     plt.figure(figsize=(10, 5))

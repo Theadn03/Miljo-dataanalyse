@@ -27,8 +27,9 @@ stations = {
     "Ålesund": "SN60945"
 }
 
+# Satt startdato 1. jan 2023 og sluttdato 1. mai 2025 for datainnhentingen
 start_date = datetime(2023, 1, 1)
-end_date = datetime.now()
+end_date = datetime(2025, 5, 1)
 
 print("Fetching data...")
 weather_data = fetch_data_from_frost(client_id, stations, start_date, end_date)
