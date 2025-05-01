@@ -62,7 +62,7 @@ print_skewness(df)
 plot_distribution(df, "Air temperature (°C)")  # Valgfritt: vis fordeling av temperatur
 
 # 5. Eksport av data
-os.makedirs("data", exist_ok=True)  # Sørg for at data-mappen finnes
+os.makedirs("../data", exist_ok=True)  # Sørg for at den lagrer seg i "data" mappen og at den eksisterer
 
 df.to_csv("data/weekly_weather_data.csv", index=False, encoding='utf-8')
 print("'weekly_weather_data.csv' saved in 'data/' folder.")
