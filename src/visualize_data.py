@@ -7,7 +7,7 @@ import pandas as pd
 city_colors = {
     "Steinkjer": "#FFD700",   # gul
     "Molde": "#0072B2",       # blå
-    "Ålesund": "#FF8000"     # oransje
+    "Ålesund": "#FF8000"      # oransje
 }
 
 
@@ -27,7 +27,7 @@ def plot_temperature_trend(df):
     # Legget til aksetitler, tittel og instillinger for graf
     plt.xlabel("Time")
     plt.ylabel("Temp")
-    plt.title("Temperature at 12:00pm every Monday from 01.01.2020 to 01.05.2025")
+    plt.title("Temperature at 12:00 every Monday from 01.01.2023 to 01.05.2025")
     plt.legend()
     plt.grid()
     plt.show()
@@ -49,7 +49,7 @@ def plot_environmental_factors(df):
     # Legget til aksetitler, tittel og instillinger for graf
     plt.xlabel("Time")
     plt.ylabel("Relative humidity (%)")
-    plt.title("Relative Humidity at 12:00 every Monday")
+    plt.title("Relative Humidity at 12:00 every Monday from 01.01.2023 to 01.05.2025")
     plt.legend()
     plt.grid()
     plt.tight_layout()
@@ -72,7 +72,7 @@ def plot_precipitation(df):
     # Legget til aksetitler, tittel og instillinger for graf
     plt.xlabel("Time")
     plt.ylabel("Precipitation amount (mm)")
-    plt.title("Precipitation at 12:00 every Monday")
+    plt.title("Precipitation at 12:00 every Monday from 01.01.2023 to 01.05.2025")
     plt.legend()
     plt.grid()
     plt.tight_layout()
@@ -95,7 +95,7 @@ def plot_wind_speed(df):
     # Legget til aksetitler, tittel og instillinger for graf
     plt.xlabel("Time")
     plt.ylabel("Wind Speed (m/s)")
-    plt.title("Wind Speed at 12:00 every Monday")
+    plt.title("Wind Speed at 12:00 every Monday from 01.01.2023 to 01.05.2025")
     plt.legend()
     plt.grid()
     plt.tight_layout()
