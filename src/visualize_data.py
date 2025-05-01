@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+import pandas as pd
 
 # Farger til de ulike byene
 city_colors = {
@@ -22,10 +23,11 @@ def plot_temperature_trend(df):
 
     plt.xlabel("Time")
     plt.ylabel("Temp")
-    plt.title("Temperature at 12:00pm every Monday from 01.01.2023 to 01.05.2025")
+    plt.title("Temperature at 12:00pm every Monday from 01.01.2020 to 01.05.2025")
     plt.legend()
     plt.grid()
     plt.show()
+
         
 def plot_environmental_factors(df):
     plt.figure(figsize=(12, 6))
