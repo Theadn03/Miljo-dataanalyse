@@ -10,26 +10,42 @@ city_colors = {
     "Ålesund": "#FF8000"      # oransje
 }
 
-
 def plot_temperature_trend(df):
+    """
+    Plotter temperaturutvikling for hver by basert på daglig gjennomsnittstemperatur.
+
+    Funksjonen filtrerer ut temperaturmålinger av typen 'mean(air_temperature P1D)'
+    og plottet disse for hver by over tid. Hver by får sin egen farge hvis spesifisert
+    i ordboken 'city_colors'.
+    """
     plt.figure(figsize=(12, 6))
 
-    # Går igjennom hver by i datasettet
+    # Går gjennom hver unik by i datasettet
     for city in df["Location"].unique():
         subset = df[df["Location"] == city]
-        subset_filtered = subset[subset["elementId"] == "mean(air_temperature P1D)"]
+        subset_filtered = subset[
+            subset["elementId"] == "mean(air_temperature P1D)"
+        ]
 
-        # Plotter temperaturdata dersom det finnes 
+        # Plotter temperaturdata dersom det finnes for byen
         if not subset_filtered.empty:
-            plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city, color=city_colors.get(city, None))
+            plt.plot(
+                subset_filtered["Time"],
+                subset_filtered["value"],
+                label=city,
+                color=city_colors.get(city, None)
+            )
 
-    # Legget til aksetitler, tittel og instillinger for graf
+    # Legger til aksetitler og diagraminnstillinger
     plt.xlabel("Time")
     plt.ylabel("Temp")
-    plt.title("Temperature at 12:00 every Monday from 01.01.2023 to 01.05.2025")
+    plt.title(
+        "Temperature at 12:00 every Monday from 01.01.2023 to 01.05.2025"
+    )
     plt.legend()
     plt.grid()
     plt.show()
+
 
         
 def plot_environmental_factors(df):
