@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv  
 from datetime import datetime
 from fetch_data import fetch_data_from_frost
 from process_data import process_and_clean_data
@@ -19,7 +20,8 @@ from analyze_data import (
 )
 
 # 1. Konfigurasjon og datainnhenting
-client_id = "e0cdd794-6446-4380-9df0-e6828509519c"  # API-nøkkel for tilgang til Frost-tjenesten
+load_dotenv()
+client_id = os.getenv("API-KEY")  # API-nøkkel for tilgang til Frost-tjenesten
 
 stations = {
     "Steinkjer": "SN70680",
