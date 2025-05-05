@@ -8,3 +8,9 @@ Vi har hentet inn data for luft-temperatur, luft-fuktighet, vind-hastighet (mang
 
 TBC----------------------
 
+## Undermapper
+
+- [src/README.md](src/README.md) – Dokumentasjon for Python-modulene
+- [data/README.md](data/README.md) – Beskrivelse av datastrukturen
+- [notebooks/README.md](notebooks/README.md) – Notebook og bruksinstruksjoner
+- [tests/README.md](tests/README.md) – Oversikt over enhetstester
