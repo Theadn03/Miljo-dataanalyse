@@ -21,7 +21,6 @@ def plot_temperature_trend(df):
 
         # Plotter temperaturdata dersom det finnes 
         if not subset_filtered.empty:
-            print(subset_filtered)  # For feilsøking
             plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city, color=city_colors.get(city, None))
 
     # Legget til aksetitler, tittel og instillinger for graf
@@ -43,7 +42,6 @@ def plot_environmental_factors(df):
         
         # Plotter data dersom det finnes
         if not subset_filtered.empty:
-            print(subset_filtered)  # For feilsøking
             plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city, color=city_colors.get(city, None))
     
     # Legget til aksetitler, tittel og instillinger for graf
@@ -65,8 +63,7 @@ def plot_precipitation(df):
         subset_filtered = subset[subset["elementId"] == "sum(precipitation_amount P1D)"]
         
         # Plotter data dersom det finnes
-        if not subset_filtered.empty:
-            print(subset_filtered)  # For feilsøking 
+        if not subset_filtered.empty: 
             plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city, color=city_colors.get(city, None))
     
     # Legget til aksetitler, tittel og instillinger for graf
@@ -89,7 +86,6 @@ def plot_wind_speed(df):
         
         # Plotter data dersom det finnes
         if not subset_filtered.empty:
-            print(subset_filtered)  # For feilsøking
             plt.plot(subset_filtered["Time"], subset_filtered["value"], label=city, color=city_colors.get(city, None))
     
     # Legget til aksetitler, tittel og instillinger for graf
