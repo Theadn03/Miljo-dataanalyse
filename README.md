@@ -16,14 +16,20 @@ Vi har valgt tre geografisk ulike byer i Norge:
 Geografisk plassering har stor betydning for lokale værforhold. Kystnære byer som Ålesund og Molde påvirkes av havklima, noe som gir høyere luftfuktighet, jevnere temperatur og mer nedbør. Steinkjer, som ligger lenger inn i landet, opplever typisk kaldere vintre og mer markerte sesongvariasjoner.
 
 **Fargekoder for byer**
-I våre visualiseringer har vi brukt fargene blå, oransje og gul. Vi har tatt insiprasjon fra byene sine fotballag slik at hver farge representerer hver sin by.
+I våre visualiseringer har vi brukt fargene blå, oransje og gul. Vi har tatt insiprasjon fra byene sine fotballag slik at hver farge representerer hver sin by. På den måten er det enklere å se hva som illustrer hvilken by.
 
 **<span style="color:#FFD700">Steinkjer er gul</span>**    
 **<span style="color:#0072B2">Molde er blå</span>**
 **<span style="color:#FF8000">Ålesund er oransje</span>**
 
+<img src="images/steinkjer_logo.png" alt="Steinkjer FK logo" width="150"/>
+
+<img src="images/molde_logo.png" alt="Molde FK logo" width="150"/>
+
+<img src="images/aalesund_logo.png" alt="Molde FK logo" width="90"/>
 
 
+Her kan man se de ulike fotballagene vi har hentet farge inspirasjon fra.
 
 ## Datagrunnlag
 Dataene er hentet fra [Meteorologisk institutt sitt Frost API](https://frost.met.no/). 
