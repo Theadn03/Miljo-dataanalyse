@@ -25,7 +25,11 @@ Thumbs.db
 *.log
 *.sqlite
 *.db
+.pytest_cache/
 
 # Exporter og interaktive grafer
 *.html
 *.json
+
+# VS Code workspace metadata (valgfritt)
+*.code-workspace
