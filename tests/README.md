@@ -1,3 +1,4 @@
+# Tests
 Denne mappen inneholder automatiske enhetstester for sentrale funksjoner i prosjektet. Testene er skrevet med pytest.
 
 # Innhold

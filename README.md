@@ -26,7 +26,7 @@ I våre visualiseringer har vi brukt fargene blå, oransje og gul. Vi har tatt i
 
 <img src="images/molde_logo.png" alt="Molde FK logo" width="150"/>
 
-<img src="images/aalesund_logo.png" alt="Molde FK logo" width="90"/>
+<img src="images/aalesund_logo.png" alt="Aalesund FK logo" width="80"/>
 
 
 Her kan man se de ulike fotballagene vi har hentet farge inspirasjon fra.
@@ -56,6 +56,7 @@ Visualiseringene gir innsikt i hvordan klimaet varierer mellom byene og over tid
 ## Prosjektstruktur
 ├── data/           # Inneholder rå og behandlet data
 ├── docs/           # Dokumentasjon 
+├── images/         # Bilder
 ├── notebooks/      # Jupyter Notebooks for analyse og visualisering
 ├── src/            # Python-moduler for datahenting og -behandling
 ├── tests/          # Enhetstester
@@ -69,7 +70,3 @@ Visualiseringene gir innsikt i hvordan klimaet varierer mellom byene og over tid
 - [data/README.md](data/README.md) – Beskrivelse av datastrukturen
 - [notebooks/README.md](notebooks/README.md) – Notebook og bruksinstruksjoner
 - [tests/README.md](tests/README.md) – Oversikt over enhetstester
-
-
-## Bidragsytere
-**Gruppe 50** – []

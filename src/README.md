@@ -1,4 +1,6 @@
+# Src
 Denne mappen inneholder alle Python-modulene som brukes til innhenting, bearbeiding, analyse, modellering og visualisering av værdata. 
+
 Denne mappen representerer den sentrale logikken i prosjektet Miljø-dataanalyse.
 
 # Innhold
