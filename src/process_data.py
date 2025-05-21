@@ -2,25 +2,34 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import missingno as msno
 
-def handle_missing_values(df: pd.DataFrame, visualize: bool = True) -> pd.DataFrame:
+
+def handle_missing_values(
+    df: pd.DataFrame,
+    visualize: bool = True
+) -> pd.DataFrame:
     """
-    Cleans a DataFrame by handling missing values.
+    Clean the input DataFrame by handling missing values.
 
     Operations:
-    - Drops rows with missing 'timestamp' or 'city'
-    - Interpolates temperature (linear)
-    - Forward- and backward-fills humidity
-    - Fills remaining numeric columns with median values
-    - Optionally visualizes missing data before and after cleaning
+    - Drop rows with missing 'Time' or 'Location'
+    - Interpolate 'temperature' values lineært
+    - Fill 'humidity' values with forward- and backward-fill
+    - Fill other numeric columns with median values
+    - Optional visualization before and after cleaning
 
     Parameters:
         df (pd.DataFrame): Input dataset
-        visualize (bool): Whether to show missing data plots (default: True)
+        visualize (bool): If True, displays missing value plots
 
     Returns:
         pd.DataFrame: Cleaned dataset
     """
     cleaned_df = df.copy()
+
+    required_cols = ["Time", "Location"]
+    for col in required_cols:
+        if col not in cleaned_df.columns:
+            raise ValueError(f"Missing required column: '{col}'")
 
     if visualize:
         print("Visualizing missing values before cleaning:")
@@ -28,16 +37,13 @@ def handle_missing_values(df: pd.DataFrame, visualize: bool = True) -> pd.DataFr
         plt.title("Before Cleaning")
         plt.show()
 
-    # Drop rows missing critical identifiers
     cleaned_df = cleaned_df.dropna(subset=["Time", "Location"])
 
-    # Interpolate temperature
     if "temperature" in cleaned_df.columns:
         cleaned_df["temperature"] = cleaned_df["temperature"].interpolate(
             method="linear"
         )
 
-    # Forward/backward fill humidity
     if "humidity" in cleaned_df.columns:
         cleaned_df["humidity"] = (
             cleaned_df["humidity"]
@@ -45,10 +51,10 @@ def handle_missing_values(df: pd.DataFrame, visualize: bool = True) -> pd.DataFr
             .fillna(method="bfill")
         )
 
-    # Fill remaining numeric columns with median
     numeric_cols = cleaned_df.select_dtypes(
         include=["float64", "int64"]
     ).columns
+
     for col in numeric_cols:
         if cleaned_df[col].isnull().sum() > 0:
             cleaned_df[col] = cleaned_df[col].fillna(
