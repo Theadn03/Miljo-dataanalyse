@@ -1,8 +1,9 @@
 import os
+import pandas as pd
 from dotenv import load_dotenv  
 from datetime import datetime
 from fetch_data import fetch_data_from_frost
-from process_data import process_and_clean_data
+from process_data import handle_missing_values
 from visualize_data import plot_histogram
 from visualize_data import plot_scatterplot
 from regression_model import train_model_for_city
@@ -36,11 +37,10 @@ end_date = datetime(2025, 5, 1)
 print("Fetching data...")
 weather_data = fetch_data_from_frost(client_id, stations, start_date, end_date)
 
+df_raw = pd.DataFrame(weather_data)
+
 # 2. Databehandling og rensing
-print("Processing and cleaning data...")
-df = process_and_clean_data(weather_data)
-df = df.infer_objects(copy=False)  # Legg til denne linjen
-df.interpolate(method="linear", inplace=True)
+df = handle_missing_values(df_raw, visualize=True)
 
 # 3. Visualisering
 print("Creating visualization...")
