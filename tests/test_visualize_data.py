@@ -1,11 +1,16 @@
-# Tester at visualiseringen kjører uten feil
+# Test that the temperature plot function runs without throwing exceptions
 import pandas as pd
 from src.visualize_data import plot_temperature_trend
 
 
 def test_plot_temperature_trend_runs():
     """
-    Tester at plot_temperature_trend kjører uten å kaste exception.
+    Smoke test:
+    Verifies that the 'plot_temperature_trend' function runs without raising an exception
+    when provided with minimal valid input data.
+
+    This test does not validate the correctness of the plot output,
+    only that no runtime errors occur.
     """
     data = pd.DataFrame({
         "Location": ["Molde"],

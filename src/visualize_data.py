@@ -3,25 +3,26 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
-# Farger basert på hjembyenes fotballdrakter
+# Custom color scheme for cities, inspired by football jerseys
 city_colors = {
-    "Steinkjer": "#FFD700",   # gul
-    "Molde": "#0072B2",       # blå
-    "Ålesund": "#FF8000"      # oransje
+    "Steinkjer": "#FFD700",   # Yellow
+    "Molde": "#0072B2",       # Blue
+    "Ålesund": "#FF8000"      # Orange
 }
 
 
 def plot_temperature_trend(df: pd.DataFrame) -> None:
     """
-    Plot temperature trend over tid for hver by.
+    Plot temperature trends over time for each city.
+    
+    Parameters:
+        df (pd.DataFrame): Dataset containing temperature data with 'Time' and 'Location'
     """
     plt.figure(figsize=(12, 6))
 
     for city in df["Location"].unique():
         subset = df[df["Location"] == city]
-        filtered = subset[
-            subset["elementId"] == "mean(air_temperature P1D)"
-        ]
+        filtered = subset[subset["elementId"] == "mean(air_temperature P1D)"]
         if not filtered.empty:
             plt.plot(
                 filtered["Time"],
@@ -32,9 +33,7 @@ def plot_temperature_trend(df: pd.DataFrame) -> None:
 
     plt.xlabel("Time")
     plt.ylabel("Temperature (°C)")
-    plt.title(
-        "Temperature at 12:00 every Monday from 01.01.2023 to 01.05.2025"
-    )
+    plt.title("Temperature at 12:00 every Monday from 01.01.2023 to 01.05.2025")
     plt.legend()
     plt.grid()
     plt.tight_layout()
@@ -43,15 +42,16 @@ def plot_temperature_trend(df: pd.DataFrame) -> None:
 
 def plot_environmental_factors(df: pd.DataFrame) -> None:
     """
-    Plot relative humidity for hver by over tid.
+    Plot relative humidity trends over time for each city.
+    
+    Parameters:
+        df (pd.DataFrame): Dataset containing humidity data with 'Time' and 'Location'
     """
     plt.figure(figsize=(12, 6))
 
     for city in df["Location"].unique():
         subset = df[df["Location"] == city]
-        filtered = subset[
-            subset["elementId"] == "mean(relative_humidity P1D)"
-        ]
+        filtered = subset[subset["elementId"] == "mean(relative_humidity P1D)"]
         if not filtered.empty:
             plt.plot(
                 filtered["Time"],
@@ -62,10 +62,7 @@ def plot_environmental_factors(df: pd.DataFrame) -> None:
 
     plt.xlabel("Time")
     plt.ylabel("Relative humidity (%)")
-    plt.title(
-        "Relative Humidity at 12:00 every Monday "
-        "from 01.01.2023 to 01.05.2025"
-    )
+    plt.title("Relative Humidity at 12:00 every Monday from 01.01.2023 to 01.05.2025")
     plt.legend()
     plt.grid()
     plt.tight_layout()
@@ -74,15 +71,16 @@ def plot_environmental_factors(df: pd.DataFrame) -> None:
 
 def plot_precipitation(df: pd.DataFrame) -> None:
     """
-    Plot nedbør over tid for hver by.
+    Plot precipitation trends over time for each city.
+    
+    Parameters:
+        df (pd.DataFrame): Dataset containing precipitation data
     """
     plt.figure(figsize=(12, 6))
 
     for city in df["Location"].unique():
         subset = df[df["Location"] == city]
-        filtered = subset[
-            subset["elementId"] == "sum(precipitation_amount P1D)"
-        ]
+        filtered = subset[subset["elementId"] == "sum(precipitation_amount P1D)"]
         if not filtered.empty:
             plt.plot(
                 filtered["Time"],
@@ -93,10 +91,7 @@ def plot_precipitation(df: pd.DataFrame) -> None:
 
     plt.xlabel("Time")
     plt.ylabel("Precipitation amount (mm)")
-    plt.title(
-        "Precipitation at 12:00 every Monday "
-        "from 01.01.2023 to 01.05.2025"
-    )
+    plt.title("Precipitation at 12:00 every Monday from 01.01.2023 to 01.05.2025")
     plt.legend()
     plt.grid()
     plt.tight_layout()
@@ -105,15 +100,16 @@ def plot_precipitation(df: pd.DataFrame) -> None:
 
 def plot_wind_speed(df: pd.DataFrame) -> None:
     """
-    Plot vindhastighet over tid for hver by.
+    Plot wind speed trends over time for each city.
+    
+    Parameters:
+        df (pd.DataFrame): Dataset containing wind speed data
     """
     plt.figure(figsize=(12, 6))
 
     for city in df["Location"].unique():
         subset = df[df["Location"] == city]
-        filtered = subset[
-            subset["elementId"] == "mean(wind_speed P1D)"
-        ]
+        filtered = subset[subset["elementId"] == "mean(wind_speed P1D)"]
         if not filtered.empty:
             plt.plot(
                 filtered["Time"],
@@ -124,10 +120,7 @@ def plot_wind_speed(df: pd.DataFrame) -> None:
 
     plt.xlabel("Time")
     plt.ylabel("Wind Speed (m/s)")
-    plt.title(
-        "Wind Speed at 12:00 every Monday "
-        "from 01.01.2023 to 01.05.2025"
-    )
+    plt.title("Wind Speed at 12:00 every Monday from 01.01.2023 to 01.05.2025")
     plt.legend()
     plt.grid()
     plt.tight_layout()
@@ -136,7 +129,12 @@ def plot_wind_speed(df: pd.DataFrame) -> None:
 
 def plot_histogram(df: pd.DataFrame, element_id: str, label: str) -> None:
     """
-    Lag et interaktivt histogram for valgt værvariabel (elementId).
+    Create an interactive histogram using Plotly for a given weather element.
+
+    Parameters:
+        df (pd.DataFrame): Dataset with values and element identifiers
+        element_id (str): The specific elementId to filter by
+        label (str): Label for the x-axis and title
     """
     filtered = df[df["elementId"] == element_id]
     if filtered.empty:
@@ -164,17 +162,19 @@ def plot_histogram(df: pd.DataFrame, element_id: str, label: str) -> None:
     fig.show()
 
 
-def plot_scatterplot(
-    y_test: pd.Series,
-    y_pred: pd.Series,
-    city: str
-) -> None:
+def plot_scatterplot(y_test: pd.Series, y_pred: pd.Series, city: str) -> None:
     """
-    Scatterplot av faktisk vs. predikert luftfuktighet for én by.
+    Plot a scatterplot of actual vs. predicted humidity for one city.
+
+    Parameters:
+        y_test (pd.Series): True humidity values
+        y_pred (pd.Series): Predicted humidity values
+        city (str): Name of the city used for coloring and title
     """
     plt.figure(figsize=(10, 5))
     plt.scatter(y_test, y_pred, label="Predictions", alpha=0.6)
 
+    # Add diagonal line representing perfect prediction
     min_val = min(y_test.min(), y_pred.min())
     max_val = max(y_test.max(), y_pred.max())
 

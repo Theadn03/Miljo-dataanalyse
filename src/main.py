@@ -1,3 +1,15 @@
+"""
+Main script for fetching, processing, analyzing, and visualizing weather data.
+
+This pipeline performs the following steps:
+1. Loads configuration and retrieves data from the Frost API
+2. Cleans and prepares the data
+3. Generates visualizations for exploratory data analysis
+4. Performs basic statistical and correlation analysis
+5. Trains regression models per city and visualizes predictions
+6. Saves the final dataset to CSV for further use
+"""
+
 import os
 from datetime import datetime
 
@@ -22,7 +34,7 @@ from analyze_data import (
     print_skewness
 )
 
-# 1. Konfigurasjon og datainnhenting
+# Step 1: Configuration and data fetching
 load_dotenv()
 client_id = os.getenv("API-KEY")
 
@@ -42,10 +54,10 @@ weather_data = fetch_data_from_frost(
 
 df_raw = pd.DataFrame(weather_data)
 
-# 2. Databehandling og rensing
+# Step 2: Data cleaning and preparation
 df = handle_missing_values(df_raw, visualize=True)
 
-# 3. Visualisering
+# Step 3: Visualization
 print("Creating visualization...")
 
 plot_temperature_trend(df)
@@ -56,21 +68,22 @@ plot_wind_speed(df)
 plot_histogram(df, "mean(air_temperature P1D)", "Air Temperature (°C)")
 plot_histogram(df, "mean(relative_humidity P1D)", "Relative Humidity (%)")
 
+# Train and evaluate models per city
 for city in df["Location"].unique():
     model, y_test, y_pred = train_model_for_city(df, city)
     plot_scatterplot(y_test, y_pred, city)
 
-# 4. Statistisk analyse
+# Step 4: Statistical analysis
 print("Running statistical analysis...")
 
 print_basic_statistics(df)
 print_correlation(df)
 print_skewness(df)
 
-# Optional: Show distribution of air temperature
+# Optional: Additional distribution plot
 plot_distribution(df, "Air temperature (°C)")
 
-# 5. Eksport av data
+# Step 5: Export data to CSV
 os.makedirs("../data", exist_ok=True)
 
 df.to_csv(

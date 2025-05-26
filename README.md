@@ -61,8 +61,8 @@ Visualiseringene gir innsikt i hvordan klimaet varierer mellom byene og over tid
 ├── src/            # Python-moduler for datahenting og -behandling
 ├── tests/          # Enhetstester
 ├── .gitignore     
-├── README.md       # Hoveddokumentasjon
-├── releasenote.md  # Endringslogg
+├── [README.md](README.md)       # Hoveddokumentasjon
+├── [releasenote.md](releasenote.md)  # Endringslogg
 └── requirements.txt
 
 ## Undermapper
