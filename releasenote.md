@@ -25,7 +25,7 @@ Denne versjonen inkluderer en komplett og fungerende applikasjon for innhenting,
   Lineær regresjon for prediksjon av temperatur, med modell evaluert per by (scikit-learn). Resultatene vises som scatterplots med predikert vs. faktisk verdi.
 
 - *Refleksjonsnotat:*  
-  Vedlagt som reflection.md, inneholder læringspunkter, vurdering av resultat, samarbeid og forslag til forbedringer.
+  Vedlagt som reflective_note.pdf, inneholder læringspunkter, vurdering av resultat, samarbeid og forslag til forbedringer.
 
 ## Teknisk struktur
 

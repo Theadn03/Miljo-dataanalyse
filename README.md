@@ -22,11 +22,11 @@ I våre visualiseringer har vi brukt fargene blå, oransje og gul. Vi har tatt i
 **<span style="color:#0072B2">Molde er blå</span>**
 **<span style="color:#FF8000">Ålesund er oransje</span>**
 
-<img src="images/steinkjer_logo.png" alt="Steinkjer FK logo" width="150"/>
+<img src="resources/images/steinkjer_logo.png" alt="Steinkjer FK logo" width="150"/>
 
-<img src="images/molde_logo.png" alt="Molde FK logo" width="150"/>
+<img src="resources/images/molde_logo.png" alt="Molde FK logo" width="150"/>
 
-<img src="images/aalesund_logo.png" alt="Aalesund FK logo" width="80"/>
+<img src="resources/images/aalesund_logo.png" alt="Aalesund FK logo" width="80"/>
 
 
 Her kan man se de ulike fotballagene vi har hentet farge inspirasjon fra.
