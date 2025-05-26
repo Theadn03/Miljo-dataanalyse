@@ -1,11 +1,16 @@
-# Tester at regresjonsmodellen faktisk trenes og gir output som forventet
+# Test that the regression model is properly trained and produces predictions
 import pandas as pd
 from src.regression_model import train_model_for_city
 
 
 def test_train_model_for_city_output():
     """
-    Tester at en modell trenes korrekt med gyldig minidatasett.
+    Positive test:
+    Verifies that the regression model is trained correctly with minimal valid input.
+    
+    Expected behavior:
+    - The returned model has a 'predict' method
+    - The length of predicted and actual target arrays match
     """
     data = pd.DataFrame({
         "Location": ["Molde"] * 9,
@@ -35,11 +40,15 @@ def test_train_model_for_city_output():
 
 def test_train_model_for_city_empty():
     """
-    Tester at funksjonen feiler med tom input.
+    Negative test:
+    Ensures the function raises an error when given an empty input DataFrame.
+    
+    Expected behavior:
+    - A ValueError is raised
     """
     df = pd.DataFrame(columns=["Location", "Time", "elementId", "value"])
     try:
         train_model_for_city(df, "Molde")
-        assert False, "Function should fail on empty input"
+        assert False, "Function should raise ValueError on empty input"
     except ValueError:
         pass
