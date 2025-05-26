@@ -4,7 +4,10 @@ import matplotlib.pyplot as plt
 
 def print_basic_statistics(df: pd.DataFrame) -> None:
     """
-    Print mean, median, and standard deviation for selected variables.
+    Print basic descriptive statistics (mean, median, std. dev.) for key environmental variables.
+    
+    Parameters:
+        df (pd.DataFrame): DataFrame containing environmental data with 'elementId' and 'value' columns.
     """
     print("\nDescriptive statistics (temperature, precipitation, wind, humidity):")
 
@@ -28,14 +31,19 @@ def print_basic_statistics(df: pd.DataFrame) -> None:
 
 def print_correlation(df: pd.DataFrame) -> None:
     """
-    Print correlation between temperature and other selected variables.
+    Print correlation values between temperature and selected environmental variables.
+    
+    Parameters:
+        df (pd.DataFrame): DataFrame containing time-series data with 'elementId', 'Time', 'Location' and 'value'.
     """
     print("\nCorrelation between temperature and other variables:")
 
+    # Extract temperature data
     temp = df[df["elementId"] == "mean(air_temperature P1D)"][
         ["Time", "Location", "value"]
     ].rename(columns={"value": "Temperature"})
 
+    # Define other variables to correlate with temperature
     variables = [
         ("mean(relative_humidity P1D)", "Humidity"),
         ("mean(wind_speed P1D)", "Wind Speed"),
@@ -47,6 +55,7 @@ def print_correlation(df: pd.DataFrame) -> None:
             ["Time", "Location", "value"]
         ].rename(columns={"value": label})
 
+        # Join temperature with the current variable on time and location
         merged = pd.merge(temp, other, on=["Time", "Location"])
         if not merged.empty:
             corr = merged["Temperature"].corr(merged[label])
@@ -57,7 +66,11 @@ def print_correlation(df: pd.DataFrame) -> None:
 
 def plot_distribution(df: pd.DataFrame, element_id: str) -> None:
     """
-    Plot histogram of a given variable based on its elementId.
+    Generate and display a histogram of the distribution for the given elementId.
+
+    Parameters:
+        df (pd.DataFrame): DataFrame containing environmental data.
+        element_id (str): The elementId of the variable to plot (e.g., "mean(air_temperature P1D)").
     """
     subset = df[df["elementId"] == element_id]["value"]
     if subset.empty:
@@ -76,7 +89,10 @@ def plot_distribution(df: pd.DataFrame, element_id: str) -> None:
 
 def print_skewness(df: pd.DataFrame) -> None:
     """
-    Print skewness for selected environmental variables.
+    Print the skewness of selected environmental variables.
+
+    Parameters:
+        df (pd.DataFrame): DataFrame containing environmental data with 'elementId' and 'value' columns.
     """
     print("\nSkewness in key variables:")
 
