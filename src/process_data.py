@@ -6,25 +6,25 @@ import missingno as msno
 def handle_missing_values(df: pd.DataFrame, visualize: bool = True) -> pd.DataFrame:
     """
     Cleans the input DataFrame by:
-    - Keeping only relevant columns
+    - Selecting relevant columns only
     - Dropping rows missing 'Time' or 'Location'
-    - Interpolating 'temperature'
-    - Forward/backward-filling 'humidity'
-    - Filling other numeric columns with median values
-    - Optionally visualizing missing values before and after
+    - Interpolating temperature values if present
+    - Forward and backward filling humidity values if present
+    - Filling remaining numeric columns with their median
+    - Optionally visualizing missing values before and after cleaning
 
     Parameters:
         df (pd.DataFrame): Raw input dataset
-        visualize (bool): Whether to show missingno matrix plots
+        visualize (bool): Whether to display missing value matrices
 
     Returns:
-        pd.DataFrame: Cleaned dataset
+        pd.DataFrame: Cleaned dataset ready for analysis
     """
-    # Behold kun de kolonnene som er relevante for videre analyse
+    # Keep only relevant columns for analysis
     columns_to_keep = ["elementId", "value", "Time", "Location"]
     cleaned_df = df[columns_to_keep].copy()
 
-    # Valider at nødvendige kolonner finnes
+    # Ensure critical columns exist
     required_cols = ["Time", "Location"]
     for col in required_cols:
         if col not in cleaned_df.columns:
@@ -36,16 +36,14 @@ def handle_missing_values(df: pd.DataFrame, visualize: bool = True) -> pd.DataFr
         plt.title("Before Cleaning")
         plt.show()
 
-    # Dropp rader med manglende tid/sted
+    # Drop rows missing timestamp or location
     cleaned_df = cleaned_df.dropna(subset=["Time", "Location"])
 
-    # Interpoler temperatur hvis tilstede
+    # Interpolate temperature if available
     if "temperature" in cleaned_df.columns:
-        cleaned_df["temperature"] = cleaned_df["temperature"].interpolate(
-            method="linear"
-        )
+        cleaned_df["temperature"] = cleaned_df["temperature"].interpolate(method="linear")
 
-    # Fyll luftfuktighet hvis tilstede
+    # Fill missing humidity values using forward and backward fill
     if "humidity" in cleaned_df.columns:
         cleaned_df["humidity"] = (
             cleaned_df["humidity"]
@@ -53,16 +51,11 @@ def handle_missing_values(df: pd.DataFrame, visualize: bool = True) -> pd.DataFr
             .fillna(method="bfill")
         )
 
-    # Medianfyll for andre numeriske kolonner
-    numeric_cols = cleaned_df.select_dtypes(
-        include=["float64", "int64"]
-    ).columns
-
+    # Fill other numeric columns with their median value
+    numeric_cols = cleaned_df.select_dtypes(include=["float64", "int64"]).columns
     for col in numeric_cols:
         if cleaned_df[col].isnull().sum() > 0:
-            cleaned_df[col] = cleaned_df[col].fillna(
-                cleaned_df[col].median()
-            )
+            cleaned_df[col] = cleaned_df[col].fillna(cleaned_df[col].median())
 
     if visualize:
         print("Visualizing missing values after cleaning:")
