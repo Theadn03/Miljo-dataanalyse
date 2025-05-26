@@ -8,7 +8,12 @@ from src.fetch_data import fetch_data_from_frost
 
 def test_fetch_data_valid_input():
     """
-    Positive test: Fetches data using valid client ID and station ID.
+    Positive test:
+    Verifies that the function returns a list of observations when called
+    with a valid API key and a known weather station ID.
+
+    Expected behavior:
+    - The function returns a list (possibly non-empty).
     """
     load_dotenv()
     client_id = os.getenv("API-KEY")
@@ -22,11 +27,16 @@ def test_fetch_data_valid_input():
 
 def test_fetch_data_invalid_station():
     """
-    Negative test: Returns empty list for unknown station ID.
+    Negative test:
+    Ensures that an unknown or invalid station ID results in an empty list,
+    rather than raising an exception or returning malformed data.
+
+    Expected behavior:
+    - The function returns an empty list.
     """
     load_dotenv()
     client_id = os.getenv("API-KEY")
-    stations = {"Unknown": "SN00000"}  # Nonexistent station
+    stations = {"Unknown": "SN00000"}  # Invalid or non-existent station
     start = datetime(2023, 1, 1)
     end = datetime(2023, 1, 2)
 
